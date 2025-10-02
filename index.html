@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PhotMedia Rebrand</title>
+  <style>
+    /* === Reset & Fonts === */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; background: linear-gradient(to bottom, #111, #000); color: #eee; }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    button { cursor: pointer; }
+
+    /* === Layout Helpers === */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
+    .section { padding: 4rem 1rem; }
+    .grid { display: grid; gap: 1.5rem; }
+    .btn { display: inline-block; padding: 0.75rem 1.5rem; border-radius: 2rem; font-weight: bold; }
+    .btn-primary { background: #e11d48; color: #fff; }
+    .btn-secondary { background: rgba(255,255,255,0.1); color: #fff; }
+
+    /* === Header === */
+    header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; }
+    header .inner { display: flex; justify-content: space-between; align-items: center; padding: 1rem; background: rgba(0,0,0,0.6); backdrop-filter: blur(10px); }
+    header nav a { margin-left: 1rem; font-size: 0.9rem; }
+    header nav a:hover { color: #fff; }
+
+    /* === Hero === */
+    .hero { padding-top: 6rem; padding-bottom: 4rem; display: grid; gap: 2rem; align-items: center; }
+    .hero h1 { font-size: 2.5rem; font-weight: bold; line-height: 1.2; }
+    .hero p { margin-top: 1rem; font-size: 1.1rem; color: #ccc; }
+    .hero-buttons { margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    /* === Stats === */
+    .stats { margin-top: 2rem; display: grid; grid-template-columns: repeat(2,1fr); gap: 1rem; }
+    .stat { background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 1rem; text-align: center; }
+    .stat .value { font-size: 1.5rem; font-weight: bold; }
+
+    /* === Services === */
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 1.5rem; }
+    .service { background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 1rem; transition: transform 0.3s; }
+    .service:hover { transform: translateY(-5px); }
+
+    /* === Portfolio === */
+    .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap: 1.5rem; margin-top: 2rem; }
+    .portfolio-item { border-radius: 1rem; overflow: hidden; background: rgba(255,255,255,0.05); }
+    .portfolio-item img { height: 200px; object-fit: cover; width: 100%; }
+
+    /* === About === */
+    .about { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center; }
+    .about img { border-radius: 1rem; }
+
+    /* === Contact === */
+    .contact { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; background: rgba(255,255,255,0.05); padding: 2rem; border-radius: 1rem; }
+    .contact form input, .contact form textarea { width: 100%; padding: 0.75rem; margin-bottom: 1rem; border-radius: 0.5rem; border: none; background: rgba(0,0,0,0.5); color: #fff; }
+    .contact form button { padding: 0.75rem 1.5rem; border: none; border-radius: 2rem; background: #e11d48; color: #fff; font-weight: bold; }
+
+    /* === Footer === */
+    footer { text-align: center; padding: 2rem 1rem; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 2rem; }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="inner container">
+      <div><strong>PhotMedia</strong> <small style="color:#aaa">Transport & Events</small></div>
+      <nav>
+        <a href="#services">Services</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero container">
+    <div>
+      <h1>Book. Capture. Connect.</h1>
+      <p>Seamless ticketing, event media and bespoke photography services across Ghana.</p>
+      <div class="hero-buttons">
+        <a href="#" class="btn btn-primary">Book a Ride</a>
+        <a href="#services" class="btn btn-secondary">View Services</a>
+      </div>
+      <div class="stats">
+        <div class="stat"><div class="value">10+</div><div>Destinations</div></div>
+        <div class="stat"><div class="value">50+</div><div>Partners</div></div>
+        <div class="stat"><div class="value">200+</div><div>Events</div></div>
+        <div class="stat"><div class="value">100k+</div><div>Users</div></div>
+      </div>
+    </div>
+    <div>
+      <img src="https://picsum.photos/600/400" alt="Hero Image" />
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services" class="section container">
+    <h2>Our Services</h2>
+    <div class="services-grid">
+      <div class="service"><h3>m-Ticketing</h3><p>Book intercity transport in seconds.</p></div>
+      <div class="service"><h3>Event Coverage</h3><p>Live coverage for events & festivals.</p></div>
+      <div class="service"><h3>Photography</h3><p>Commercial & editorial photography.</p></div>
+      <div class="service"><h3>Media Solutions</h3><p>Digital content & dashboard solutions.</p></div>
+    </div>
+  </section>
+
+  <!-- Portfolio -->
+  <section id="portfolio" class="section container">
+    <h2>Portfolio</h2>
+    <div class="portfolio-grid">
+      <div class="portfolio-item"><img src="https://picsum.photos/500/300?1" alt=""><div style="padding:1rem;">Accra to Kumasi</div></div>
+      <div class="portfolio-item"><img src="https://picsum.photos/500/300?2" alt=""><div style="padding:1rem;">Festival Coverage</div></div>
+      <div class="portfolio-item"><img src="https://picsum.photos/500/300?3" alt=""><div style="padding:1rem;">Corporate Event</div></div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="section container about">
+    <div>
+      <h2>Built for Ghanaian journeys</h2>
+      <p>PhotMedia crafts seamless ticketing, brilliant event coverage and impactful digital products — from grassroots markets to national festivals.</p>
+      <div style="margin-top:1rem;">
+        <a href="#contact" class="btn btn-primary">Work with us</a>
+        <a href="#" class="btn btn-secondary">Read our story</a>
+      </div>
+    </div>
+    <img src="https://picsum.photos/500/400?4" alt="About Image" />
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="section container contact">
+    <div>
+      <h2>Contact Us</h2>
+      <p>Email: hello@photmediaghana.com</p>
+      <p>Phone: +233 0XXXXXXXXX</p>
+      <p>Address: Accra, Ghana</p>
+    </div>
+    <form>
+      <input type="text" placeholder="Your name" required>
+      <input type="email" placeholder="Your email" required>
+      <textarea placeholder="Message"></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 PhotMedia — All rights reserved.</p>
+  </footer>
+</body>
+</html>
