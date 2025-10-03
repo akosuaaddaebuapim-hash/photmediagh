@@ -87,6 +87,33 @@
       90% { transform: translate(-1%, 7%); }
     }
     
+    /* Floating Particles */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
+    
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: rgba(225, 29, 72, 0.5);
+      border-radius: 50%;
+      animation: floatParticle 15s infinite ease-in-out;
+    }
+    
+    @keyframes floatParticle {
+      0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-100vh) translateX(100px); opacity: 0; }
+    }
+    
     /* Navigation */
     nav {
       position: fixed;
@@ -123,6 +150,19 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
       letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .logo-emoji {
+      font-size: 2rem;
+      animation: bounce 2s ease-in-out infinite;
+    }
+    
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
     }
     
     .nav-links {
@@ -170,6 +210,26 @@
       cursor: pointer;
       transition: all 0.3s ease;
       box-shadow: 0 4px 15px rgba(225, 29, 72, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .cta-button::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+    
+    .cta-button:hover::before {
+      width: 300px;
+      height: 300px;
     }
     
     .cta-button:hover {
@@ -187,6 +247,7 @@
     /* Section Spacing */
     section {
       padding: 6rem 0;
+      position: relative;
     }
     
     /* Hero Section */
@@ -195,6 +256,7 @@
       display: flex;
       align-items: center;
       padding-top: 8rem;
+      position: relative;
     }
     
     .hero-grid {
@@ -249,6 +311,8 @@
       text-decoration: none;
       display: inline-block;
       border: none;
+      position: relative;
+      overflow: hidden;
     }
     
     .btn-primary {
@@ -257,8 +321,23 @@
       box-shadow: 0 10px 30px rgba(225, 29, 72, 0.3);
     }
     
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: left 0.5s;
+    }
+    
+    .btn-primary:hover::before {
+      left: 100%;
+    }
+    
     .btn-primary:hover {
-      transform: translateY(-3px);
+      transform: translateY(-3px) scale(1.05);
       box-shadow: 0 15px 40px rgba(225, 29, 72, 0.5);
     }
     
@@ -275,43 +354,46 @@
       transform: translateY(-3px);
     }
     
-    .hero-image {
+    /* Animated Illustration */
+    .hero-illustration {
       position: relative;
       animation: fadeInRight 1s ease 0.3s both;
+      height: 500px;
     }
     
-    .phone-mockup {
-      background: linear-gradient(135deg, rgba(225, 29, 72, 0.1), rgba(6, 182, 212, 0.1));
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 3rem;
-      padding: 3rem;
-      backdrop-filter: blur(20px);
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-      animation: float 6s ease-in-out infinite;
-      text-align: center;
+    .bus-animation {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     
-    .phone-mockup i {
-      font-size: 8rem;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 1rem;
+    .bus {
+      font-size: 12rem;
+      animation: busMove 3s ease-in-out infinite;
+      filter: drop-shadow(0 20px 40px rgba(225, 29, 72, 0.3));
     }
     
-    .phone-mockup h3 {
-      font-size: 1.5rem;
-      margin-bottom: 0.5rem;
+    @keyframes busMove {
+      0%, 100% { transform: translateX(-20px) rotate(-2deg); }
+      50% { transform: translateX(20px) rotate(2deg); }
     }
     
-    .phone-mockup p {
-      color: var(--gray);
+    .floating-icon {
+      position: absolute;
+      font-size: 3rem;
+      animation: floatIcon 3s ease-in-out infinite;
     }
     
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-20px); }
+    .icon-1 { top: 10%; right: 10%; animation-delay: 0s; }
+    .icon-2 { bottom: 20%; left: 10%; animation-delay: 1s; }
+    .icon-3 { top: 30%; left: 5%; animation-delay: 2s; }
+    
+    @keyframes floatIcon {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-30px) rotate(10deg); }
     }
     
     @keyframes fadeInUp {
@@ -373,9 +455,10 @@
       border: 1px solid rgba(255, 255, 255, 0.05);
       border-radius: 1.5rem;
       padding: 2.5rem;
-      transition: all 0.4s ease;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       position: relative;
       overflow: hidden;
+      cursor: pointer;
     }
     
     .feature-card::before {
@@ -391,27 +474,33 @@
     }
     
     .feature-card:hover {
-      transform: translateY(-10px);
+      transform: translateY(-15px) scale(1.02);
       border-color: rgba(255, 255, 255, 0.1);
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
     }
     
     .feature-card:hover::before {
       opacity: 1;
     }
     
+    .feature-card:hover .feature-icon {
+      transform: scale(1.2) rotate(10deg);
+    }
+    
     .feature-icon {
-      width: 70px;
-      height: 70px;
+      width: 80px;
+      height: 80px;
       background: linear-gradient(135deg, var(--primary), var(--secondary));
-      border-radius: 1rem;
+      border-radius: 1.2rem;
       display: flex;
       align-items: center;
       justify-content: center;
       margin-bottom: 1.5rem;
-      font-size: 1.8rem;
+      font-size: 2.5rem;
       position: relative;
       z-index: 1;
+      transition: all 0.4s ease;
+      box-shadow: 0 10px 30px rgba(225, 29, 72, 0.3);
     }
     
     .feature-card h3 {
@@ -455,22 +544,38 @@
       margin-bottom: 1.5rem;
     }
     
-    .content-image {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 2rem;
-      padding: 3rem;
-      backdrop-filter: blur(20px);
-      text-align: center;
+    .content-illustration {
+      position: relative;
+      height: 500px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     
-    .content-image i {
-      font-size: 10rem;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: float 4s ease-in-out infinite;
+    .phone-illustration {
+      font-size: 15rem;
+      animation: phoneFloat 4s ease-in-out infinite;
+      filter: drop-shadow(0 20px 60px rgba(6, 182, 212, 0.3));
+    }
+    
+    @keyframes phoneFloat {
+      0%, 100% { transform: translateY(0) rotate(-5deg); }
+      50% { transform: translateY(-30px) rotate(5deg); }
+    }
+    
+    .floating-emoji {
+      position: absolute;
+      font-size: 3rem;
+      animation: emojiFloat 3s ease-in-out infinite;
+    }
+    
+    .emoji-1 { top: 10%; right: 15%; animation-delay: 0s; }
+    .emoji-2 { bottom: 15%; left: 10%; animation-delay: 1.5s; }
+    .emoji-3 { top: 50%; right: 5%; animation-delay: 0.7s; }
+    
+    @keyframes emojiFloat {
+      0%, 100% { transform: translateY(0) scale(1); opacity: 0.7; }
+      50% { transform: translateY(-25px) scale(1.2); opacity: 1; }
     }
     
     /* Benefits Grid */
@@ -485,12 +590,30 @@
       border-left: 4px solid;
       border-image: linear-gradient(135deg, var(--primary), var(--secondary)) 1;
       padding: 2rem;
-      transition: all 0.3s ease;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .benefit-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(225, 29, 72, 0.1), transparent);
+      transition: right 0.6s;
+    }
+    
+    .benefit-card:hover::after {
+      right: 100%;
     }
     
     .benefit-card:hover {
       background: rgba(255, 255, 255, 0.05);
-      transform: translateX(10px);
+      transform: translateX(15px);
+      box-shadow: -10px 10px 30px rgba(0, 0, 0, 0.2);
     }
     
     .benefit-card h3 {
@@ -524,6 +647,24 @@
       backdrop-filter: blur(20px);
       max-width: 1000px;
       margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .mission-card::before {
+      content: '🚀';
+      position: absolute;
+      font-size: 20rem;
+      opacity: 0.03;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation: rotate 20s linear infinite;
+    }
+    
+    @keyframes rotate {
+      from { transform: translate(-50%, -50%) rotate(0deg); }
+      to { transform: translate(-50%, -50%) rotate(360deg); }
     }
     
     .mission-card h2 {
@@ -534,12 +675,16 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      position: relative;
+      z-index: 1;
     }
     
     .mission-card p {
       font-size: 1.2rem;
       color: var(--gray);
       line-height: 1.9;
+      position: relative;
+      z-index: 1;
     }
     
     /* Team Section */
@@ -555,6 +700,23 @@
       border-radius: 1.5rem;
       overflow: hidden;
       transition: all 0.4s ease;
+      position: relative;
+    }
+    
+    .team-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(225, 29, 72, 0.1), transparent);
+      transform: rotate(45deg);
+      transition: all 0.6s;
+    }
+    
+    .team-card:hover::before {
+      left: 100%;
     }
     
     .team-card:hover {
@@ -570,13 +732,34 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 5rem;
-      font-weight: 800;
-      color: rgba(255, 255, 255, 0.3);
+      font-size: 8rem;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .team-image::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(0,0,0,0.3), transparent);
+    }
+    
+    .team-emoji {
+      position: relative;
+      z-index: 1;
+      animation: teamFloat 3s ease-in-out infinite;
+    }
+    
+    @keyframes teamFloat {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-20px) scale(1.1); }
     }
     
     .team-info {
       padding: 2rem;
+      position: relative;
+      z-index: 1;
     }
     
     .team-info h3 {
@@ -624,6 +807,14 @@
       display: flex;
       align-items: center;
       gap: 1rem;
+      transition: all 0.3s ease;
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+    }
+    
+    .contact-item:hover {
+      background: rgba(255, 255, 255, 0.03);
+      transform: translateX(10px);
     }
     
     .contact-item i {
@@ -635,12 +826,22 @@
       align-items: center;
       justify-content: center;
       font-size: 1.25rem;
+      animation: iconPulse 2s ease-in-out infinite;
+    }
+    
+    @keyframes iconPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(225, 29, 72, 0.4); }
+      50% { box-shadow: 0 0 0 10px rgba(225, 29, 72, 0); }
     }
     
     .contact-form {
       display: flex;
       flex-direction: column;
       gap: 1.5rem;
+    }
+    
+    .form-group {
+      position: relative;
     }
     
     .form-group input,
@@ -661,6 +862,8 @@
       outline: none;
       background: rgba(255, 255, 255, 0.08);
       border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(225, 29, 72, 0.1);
+      transform: translateY(-2px);
     }
     
     .form-group textarea {
@@ -679,10 +882,30 @@
       cursor: pointer;
       transition: all 0.3s ease;
       box-shadow: 0 10px 30px rgba(225, 29, 72, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .submit-btn::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+    
+    .submit-btn:hover::before {
+      width: 400px;
+      height: 400px;
     }
     
     .submit-btn:hover {
-      transform: translateY(-3px);
+      transform: translateY(-3px) scale(1.05);
       box-shadow: 0 15px 40px rgba(225, 29, 72, 0.5);
     }
     
@@ -720,8 +943,8 @@
     }
     
     .social-links a {
-      width: 45px;
-      height: 45px;
+      width: 50px;
+      height: 50px;
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 0.75rem;
@@ -729,13 +952,35 @@
       align-items: center;
       justify-content: center;
       color: var(--gray);
+      font-size: 1.2rem;
       transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .social-links a::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.4s, height 0.4s;
+      z-index: -1;
+    }
+    
+    .social-links a:hover::before {
+      width: 100px;
+      height: 100px;
     }
     
     .social-links a:hover {
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
       color: white;
-      transform: translateY(-3px);
+      transform: translateY(-5px) rotate(10deg);
+      border-color: transparent;
     }
     
     .footer-links h4 {
@@ -755,11 +1000,12 @@
       color: var(--gray);
       text-decoration: none;
       transition: all 0.3s ease;
+      display: inline-block;
     }
     
     .footer-links a:hover {
       color: var(--primary);
-      padding-left: 5px;
+      padding-left: 10px;
     }
     
     .footer-bottom {
@@ -811,6 +1057,14 @@
       .footer-grid {
         grid-template-columns: 1fr;
       }
+      
+      .bus {
+        font-size: 8rem;
+      }
+      
+      .phone-illustration {
+        font-size: 10rem;
+      }
     }
     
     /* Scroll Reveal */
@@ -824,22 +1078,60 @@
       opacity: 1;
       transform: translateY(0);
     }
+    
+    /* Loading Animation */
+    .loading-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+      transition: opacity 0.5s ease;
+    }
+    
+    .loading-screen.hide {
+      opacity: 0;
+      pointer-events: none;
+    }
+    
+    .loader {
+      font-size: 5rem;
+      animation: loaderSpin 2s ease-in-out infinite;
+    }
+    
+    @keyframes loaderSpin {
+      0%, 100% { transform: rotate(0deg) scale(1); }
+      50% { transform: rotate(180deg) scale(1.2); }
+    }
   </style>
 </head>
 <body>
+  <div class="loading-screen" id="loadingScreen">
+    <div class="loader">🚌</div>
+  </div>
+  
   <div class="bg-animation"></div>
   <div class="grain"></div>
+  <div class="particles" id="particles"></div>
 
   <!-- Navigation -->
   <nav id="navbar">
     <div class="nav-container">
-      <div class="logo">PhotMedia Ghana</div>
+      <div class="logo">
+        <span class="logo-emoji">🚌</span>
+        PhotMedia Ghana
+      </div>
       <ul class="nav-links">
         <li><a href="#features">Features</a></li>
         <li><a href="#solutions">Solutions</a></li>
         <li><a href="#team">Team</a></li>
         <li><a href="#contact">Contact</a></li>
-        <li><button class="cta-button" onclick="window.open('https://dashboard.photmediaghana.com/register', '_blank')">Register Now</button></li>
+        <li><button class="cta-button" onclick="window.open('https://dashboard.photmediaghana.com/register', '_blank')">Register Now 🚀</button></li>
       </ul>
     </div>
   </nav>
@@ -850,17 +1142,18 @@
       <div class="hero-grid">
         <div class="hero-content">
           <h1>Effortless <span class="highlight">Transportation</span> Booking Experience</h1>
-          <p>Effortlessly bridging the gap between passengers and transport providers with our unique USSD application services. Ingeniously designed to unlock opportunities for bus transport operators, we provide a powerful and user-friendly platform where customers can seamlessly book their journeys.</p>
+          <p>Effortlessly bridging the gap between passengers and transport providers with our unique USSD application services. Ingeniously designed to unlock opportunities for bus transport operators, we provide a powerful and user-friendly platform where customers can seamlessly book their journeys. 🎯</p>
           <div class="hero-buttons">
-            <a href="https://dashboard.photmediaghana.com/register" class="btn-primary" target="_blank">Register as Bus Operator</a>
-            <a href="#features" class="btn-secondary">Learn More</a>
+            <a href="https://dashboard.photmediaghana.com/register" class="btn-primary" target="_blank">Register as Bus Operator 📝</a>
+            <a href="#features" class="btn-secondary">Learn More 📚</a>
           </div>
         </div>
-        <div class="hero-image">
-          <div class="phone-mockup">
-            <i class="fas fa-mobile-alt"></i>
-            <h3>USSD Ticketing</h3>
-            <p>Book tickets from any phone</p>
+        <div class="hero-illustration">
+          <div class="bus-animation">
+            <div class="bus">🚌</div>
+            <div class="floating-icon icon-1">📱</div>
+            <div class="floating-icon icon-2">🎫</div>
+            <div class="floating-icon icon-3">✨</div>
           </div>
         </div>
       </div>
@@ -871,7 +1164,7 @@
   <section id="features">
     <div class="container">
       <div class="section-header reveal">
-        <h2>Experience the Ease of Direct Engagement</h2>
+        <h2>Experience the Ease of Direct Engagement 🤝</h2>
         <p>Our comprehensive USSD solution fosters direct and immediate interaction, transcending traditional limitations. We are here to help your users navigate and confirm their transportation needs with unprecedented ease and security. Enable your customers to book their tickets anytime, anywhere, using just their mobile phones.</p>
       </div>
       <div class="features-grid">
@@ -879,28 +1172,28 @@
           <div class="feature-icon">
             <i class="fas fa-mobile-alt"></i>
           </div>
-          <h3>Unprecedented Accessibility</h3>
+          <h3>Unprecedented Accessibility 📱</h3>
           <p>Transport ticketing at your customers' fingertips. Even users with basic mobile phones can book their transportation with ease.</p>
         </div>
         <div class="feature-card reveal">
           <div class="feature-icon">
             <i class="fas fa-cogs"></i>
           </div>
-          <h3>Tailored Innovation</h3>
+          <h3>Tailored Innovation ⚙️</h3>
           <p>Harness the power of bespoke technology. Our solutions aren't one-size-fits-all; they're tailored to your needs and the needs of your users.</p>
         </div>
         <div class="feature-card reveal">
           <div class="feature-icon">
             <i class="fas fa-comments"></i>
           </div>
-          <h3>Direct Interaction</h3>
+          <h3>Direct Interaction 💬</h3>
           <p>Experience the power of seamless engagement. Our USSD application allows your customers to book bus transportation with ease, anytime, anywhere.</p>
         </div>
         <div class="feature-card reveal">
           <div class="feature-icon">
             <i class="fas fa-chart-line"></i>
           </div>
-          <h3>Economic Efficiency</h3>
+          <h3>Economic Efficiency 📈</h3>
           <p>Streamline your services and reduce overheads while providing top-notch user experiences.</p>
         </div>
       </div>
@@ -912,14 +1205,17 @@
     <div class="container">
       <div class="content-grid">
         <div class="content-text reveal">
-          <h2>Seamless Booking on Any Phone</h2>
-          <p>Embrace the convenience of managing your entire ticketing process right from your mobile device. Our USSD application harmoniously blends user-friendly interfaces with powerful functionality, facilitating high-yield synergies for both operators and customers.</p>
-          <p>Through our innovative platform, we aggregate cutting-edge, "organic" solutions for an unprecedented user experience. Our USSD application is a testament to technology's transformative power, turning ordinary mobile phones into robust ticketing systems.</p>
-          <p>Leverage our extensive experience to ease your administrative burdens. Our solution provides a holistic approach, enabling empowered e-tailers to streamline their operations, foster customer relationships, and boost efficiency.</p>
-          <p>Maximize your business performance with our forward-thinking networks and metrics. Our solution doesn't just manage ticketing; it provides valuable insights into customer behavior, enabling you to collaboratively fabricate strategies that truly resonate with your audience.</p>
+          <h2>Seamless Booking on Any Phone 📞</h2>
+          <p>Embrace the convenience of managing your entire ticketing process right from your mobile device. Our USSD application harmoniously blends user-friendly interfaces with powerful functionality, facilitating high-yield synergies for both operators and customers. 🎯</p>
+          <p>Through our innovative platform, we aggregate cutting-edge, "organic" solutions for an unprecedented user experience. Our USSD application is a testament to technology's transformative power, turning ordinary mobile phones into robust ticketing systems. 🔧</p>
+          <p>Leverage our extensive experience to ease your administrative burdens. Our solution provides a holistic approach, enabling empowered e-tailers to streamline their operations, foster customer relationships, and boost efficiency. 💼</p>
+          <p>Maximize your business performance with our forward-thinking networks and metrics. Our solution doesn't just manage ticketing; it provides valuable insights into customer behavior, enabling you to collaboratively fabricate strategies that truly resonate with your audience. 📊</p>
         </div>
-        <div class="content-image reveal">
-          <i class="fas fa-bus"></i>
+        <div class="content-illustration reveal">
+          <div class="phone-illustration">📱</div>
+          <div class="floating-emoji emoji-1">✅</div>
+          <div class="floating-emoji emoji-2">🎫</div>
+          <div class="floating-emoji emoji-3">⚡</div>
         </div>
       </div>
     </div>
@@ -929,24 +1225,24 @@
   <section id="solutions">
     <div class="container">
       <div class="section-header reveal">
-        <h2>Explore Unique Solutions Tailored for You</h2>
+        <h2>Explore Unique Solutions Tailored for You 🎯</h2>
         <p>Our approach isn't just about delivering services; we're about creating a transformative experience for your users, replacing the traditional ticketing model with an innovative, digital-first strategy.</p>
       </div>
       <div class="benefits-grid">
         <div class="benefit-card reveal">
-          <h3><i class="fas fa-star"></i> Experience Ease of Use</h3>
+          <h3><i class="fas fa-star"></i> Experience Ease of Use ⭐</h3>
           <p>Experience synergy as we deliver next-generation solutions that facilitate seamless relationships between transport providers and passengers.</p>
         </div>
         <div class="benefit-card reveal">
-          <h3><i class="fas fa-rocket"></i> Boost Ticket Sales</h3>
+          <h3><i class="fas fa-rocket"></i> Boost Ticket Sales 🚀</h3>
           <p>Illuminate your business potential by leveraging our compelling USSD application. Watch as we transform your customer interactions, leading to increased conversions.</p>
         </div>
         <div class="benefit-card reveal">
-          <h3><i class="fas fa-shield-alt"></i> Enhance User Trust</h3>
+          <h3><i class="fas fa-shield-alt"></i> Enhance User Trust 🛡️</h3>
           <p>Our USSD application allows you to build credibility and establish trust through transparency and consistency.</p>
         </div>
         <div class="benefit-card reveal">
-          <h3><i class="fas fa-chart-bar"></i> Service Insights</h3>
+          <h3><i class="fas fa-chart-bar"></i> Service Insights 📊</h3>
           <p>Coupled with our insightful analytics, understand your service's performance, adapt to user behaviour, and strategize effectively for future promotions.</p>
         </div>
       </div>
@@ -957,8 +1253,8 @@
   <section class="content-section">
     <div class="container">
       <div class="mission-card reveal">
-        <h2>Our Mission</h2>
-        <p>Our mission is to push the boundaries of what's possible in the world of transportation ticketing. We aim to set new standards in the industry, showcasing to our users the pinnacle of convenience and efficiency that can be achieved with our USSD application. When you see our company's name, know that it stands for relentless innovation and exceptional service.</p>
+        <h2>Our Mission 🎯</h2>
+        <p>Our mission is to push the boundaries of what's possible in the world of transportation ticketing. We aim to set new standards in the industry, showcasing to our users the pinnacle of convenience and efficiency that can be achieved with our USSD application. When you see our company's name, know that it stands for relentless innovation and exceptional service. 🌟</p>
       </div>
     </div>
   </section>
@@ -967,23 +1263,27 @@
   <section id="team">
     <div class="container">
       <div class="section-header reveal">
-        <h2>Our Team Members</h2>
+        <h2>Our Team Members 👥</h2>
         <p>Our team is the backbone of our success. Comprised of diverse professionals united by a common purpose, each member brings a unique set of skills, experiences, and perspectives to our company.</p>
       </div>
       <div class="team-grid">
         <div class="team-card reveal">
-          <div class="team-image">SA</div>
+          <div class="team-image">
+            <div class="team-emoji">👨‍💼</div>
+          </div>
           <div class="team-info">
             <h3>Solomon Ahenkorah</h3>
-            <p class="role">CEO</p>
+            <p class="role">CEO 🎖️</p>
             <p style="color: var(--gray); line-height: 1.8;">Leading PhotMedia Ghana's vision to revolutionize transportation ticketing across Ghana with innovative USSD technology solutions.</p>
           </div>
         </div>
         <div class="team-card reveal">
-          <div class="team-image">NR</div>
+          <div class="team-image">
+            <div class="team-emoji">👨‍💼</div>
+          </div>
           <div class="team-info">
             <h3>Nallan Rangesh</h3>
-            <p class="role">Chairman of Business Development</p>
+            <p class="role">Chairman of Business Development 📈</p>
             <p style="color: var(--gray); line-height: 1.8;">Spearheading strategic partnerships and business expansion to bring seamless ticketing solutions to transport operators nationwide.</p>
           </div>
         </div>
@@ -995,8 +1295,8 @@
   <section class="content-section">
     <div class="container">
       <div class="section-header reveal">
-        <h2>Trusted by Transport Operators</h2>
-        <p>We are proud to be a trusted partner for numerous transportation operators, who value our ability to rapidly integrate and adapt our innovative USSD application to their existing systems. Our technology isn't just about bringing compelling convenience to end-users; it also aims at optimizing resources and workflows for businesses. Join our network of satisfied partners, and experience the transformative benefits of our seamless, internal solutions.</p>
+        <h2>Trusted by Transport Operators 🤝</h2>
+        <p>We are proud to be a trusted partner for numerous transportation operators, who value our ability to rapidly integrate and adapt our innovative USSD application to their existing systems. Our technology isn't just about bringing compelling convenience to end-users; it also aims at optimizing resources and workflows for businesses. Join our network of satisfied partners, and experience the transformative benefits of our seamless, internal solutions. ✨</p>
       </div>
     </div>
   </section>
@@ -1005,45 +1305,45 @@
   <section id="contact">
     <div class="container">
       <div class="section-header reveal">
-        <h2>Contact Us</h2>
+        <h2>Contact Us 📧</h2>
         <p>Connect with us today and let's shape a better, more accessible transportation experience together.</p>
       </div>
       <div class="contact-grid reveal">
         <div class="contact-info">
-          <h3>Get In Touch</h3>
+          <h3>Get In Touch 💬</h3>
           <p>Whether you're a transport operator looking to streamline your ticketing or interested in our solutions, we'd love to hear from you.</p>
           <div class="contact-details">
             <div class="contact-item">
               <i class="fas fa-envelope"></i>
               <div>
-                <strong>Email</strong>
+                <strong>Email 📧</strong>
                 <p style="margin:0; color:var(--gray);">info@photmediaghana.com</p>
               </div>
             </div>
             <div class="contact-item">
               <i class="fas fa-globe"></i>
               <div>
-                <strong>Website</strong>
+                <strong>Website 🌐</strong>
                 <p style="margin:0; color:var(--gray);">www.photmediaghana.com</p>
               </div>
             </div>
             <div class="contact-item">
               <i class="fas fa-map-marker-alt"></i>
               <div>
-                <strong>Location</strong>
+                <strong>Location 📍</strong>
                 <p style="margin:0; color:var(--gray);">Accra, Ghana</p>
               </div>
             </div>
             <div class="contact-item">
               <i class="fas fa-desktop"></i>
               <div>
-                <strong>Dashboard</strong>
+                <strong>Dashboard 💻</strong>
                 <p style="margin:0;"><a href="https://dashboard.photmediaghana.com/register" style="color:var(--primary); text-decoration:none;" target="_blank">Register Here</a></p>
               </div>
             </div>
           </div>
         </div>
-        <form class="contact-form">
+        <form class="contact-form" id="contactForm">
           <div class="form-group">
             <input type="text" placeholder="Your Name" required>
           </div>
@@ -1056,7 +1356,7 @@
           <div class="form-group">
             <textarea placeholder="Your Message" required></textarea>
           </div>
-          <button type="submit" class="submit-btn">Send Message</button>
+          <button type="submit" class="submit-btn">Send Message 🚀</button>
         </form>
       </div>
     </div>
@@ -1067,17 +1367,17 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <h3>PhotMedia Ghana</h3>
+          <h3>PhotMedia Ghana 🚌</h3>
           <p>Revolutionizing transportation ticketing through innovative USSD technology. Bridging the gap between passengers and transport providers with seamless mTicketing solutions.</p>
           <div class="social-links">
-            <a href="#"><i class="fab fa-facebook-f"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
           </div>
         </div>
         <div class="footer-links">
-          <h4>Solutions</h4>
+          <h4>Solutions 🎯</h4>
           <ul>
             <li><a href="#features">USSD Ticketing</a></li>
             <li><a href="#solutions">Analytics</a></li>
@@ -1086,7 +1386,7 @@
           </ul>
         </div>
         <div class="footer-links">
-          <h4>Company</h4>
+          <h4>Company 🏢</h4>
           <ul>
             <li><a href="#features">About Us</a></li>
             <li><a href="#team">Our Team</a></li>
@@ -1095,7 +1395,7 @@
           </ul>
         </div>
         <div class="footer-links">
-          <h4>Resources</h4>
+          <h4>Resources 📚</h4>
           <ul>
             <li><a href="#">Documentation</a></li>
             <li><a href="#">Support</a></li>
@@ -1105,12 +1405,41 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2025 PhotMedia Ghana (Phot Media & Trading). All rights reserved.</p>
+        <p>&copy; 2025 PhotMedia Ghana (Phot Media & Trading). All rights reserved. Made with ❤️ in Ghana 🇬🇭</p>
       </div>
     </div>
   </footer>
 
   <script>
+    // Loading Screen
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('loadingScreen').classList.add('hide');
+      }, 1500);
+    });
+
+    // Create Floating Particles
+    function createParticles() {
+      const particlesContainer = document.getElementById('particles');
+      const particleCount = 20;
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 15 + 's';
+        particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+        
+        if (Math.random() > 0.5) {
+          particle.style.background = 'rgba(6, 182, 212, 0.5)';
+        }
+        
+        particlesContainer.appendChild(particle);
+      }
+    }
+    
+    createParticles();
+
     // Navbar scroll effect
     window.addEventListener('scroll', () => {
       const navbar = document.getElementById('navbar');
@@ -1140,25 +1469,61 @@
     window.addEventListener('scroll', revealOnScroll);
     revealOnScroll();
 
-    // Form submission
-    document.querySelector('.contact-form').addEventListener('submit', (e) => {
+    // Form submission with animation
+    document.getElementById('contactForm').addEventListener('submit', (e) => {
       e.preventDefault();
       
       const btn = e.target.querySelector('.submit-btn');
-      const originalText = btn.textContent;
-      btn.textContent = 'Sending...';
+      const originalText = btn.innerHTML;
+      btn.innerHTML = 'Sending... ⏳';
       btn.disabled = true;
       
+      // Create success particles
+      for (let i = 0; i < 20; i++) {
+        const particle = document.createElement('div');
+        particle.style.cssText = `
+          position: fixed;
+          width: 10px;
+          height: 10px;
+          background: ${i % 2 === 0 ? 'var(--primary)' : 'var(--secondary)'};
+          border-radius: 50%;
+          pointer-events: none;
+          z-index: 10000;
+        `;
+        particle.textContent = ['✨', '🎉', '⭐', '💫'][Math.floor(Math.random() * 4)];
+        particle.style.fontSize = '20px';
+        
+        const rect = btn.getBoundingClientRect();
+        particle.style.left = rect.left + rect.width / 2 + 'px';
+        particle.style.top = rect.top + rect.height / 2 + 'px';
+        
+        document.body.appendChild(particle);
+        
+        const angle = (Math.PI * 2 * i) / 20;
+        const velocity = 100 + Math.random() * 100;
+        
+        particle.animate([
+          { transform: 'translate(0, 0) scale(1)', opacity: 1 },
+          { 
+            transform: `translate(${Math.cos(angle) * velocity}px, ${Math.sin(angle) * velocity}px) scale(0)`, 
+            opacity: 0 
+          }
+        ], {
+          duration: 1000,
+          easing: 'cubic-bezier(0, .9, .57, 1)'
+        }).onfinish = () => particle.remove();
+      }
+      
       setTimeout(() => {
-        btn.textContent = '✓ Message Sent!';
+        btn.innerHTML = '✅ Message Sent Successfully!';
         btn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
         
         setTimeout(() => {
-          btn.textContent = originalText;
+          btn.innerHTML = originalText;
           btn.disabled = false;
           btn.style.background = '';
           e.target.reset();
-        }, 2000);
+        }, 3000);
       }, 1500);
     });
 
@@ -1195,8 +1560,48 @@
       progressBar.style.width = scrolled + '%';
     });
 
+    // Easter egg - Click logo 5 times for confetti
+    let logoClicks = 0;
+    document.querySelector('.logo').addEventListener('click', () => {
+      logoClicks++;
+      if (logoClicks === 5) {
+        for (let i = 0; i < 100; i++) {
+          setTimeout(() => {
+            const emoji = ['🎉', '🎊', '✨', '🌟', '💫', '⭐', '🚀', '🎯'][Math.floor(Math.random() * 8)];
+            const confetti = document.createElement('div');
+            confetti.textContent = emoji;
+            confetti.style.cssText = `
+              position: fixed;
+              font-size: 30px;
+              top: -50px;
+              left: ${Math.random() * 100}%;
+              pointer-events: none;
+              z-index: 10000;
+              animation: fall ${2 + Math.random() * 3}s linear forwards;
+            `;
+            
+            const styleSheet = document.createElement('style');
+            styleSheet.textContent = `
+              @keyframes fall {
+                to {
+                  transform: translateY(${window.innerHeight + 100}px) rotate(${Math.random() * 360}deg);
+                  opacity: 0;
+                }
+              }
+            `;
+            document.head.appendChild(styleSheet);
+            
+            document.body.appendChild(confetti);
+            setTimeout(() => confetti.remove(), 5000);
+          }, i * 50);
+        }
+        logoClicks = 0;
+      }
+    });
+
     console.log('%c🚀 PhotMedia Ghana - Revolutionizing Transportation', 'color: #e11d48; font-size: 20px; font-weight: bold;');
-    console.log('%cBuilt with innovation for seamless ticketing experiences', 'color: #06b6d4; font-size: 14px;');
+    console.log('%c✨ Built with passion for seamless ticketing experiences', 'color: #06b6d4; font-size: 14px;');
+    console.log('%c💡 Tip: Click the logo 5 times for a surprise!', 'color: #a855f7; font-size: 12px;');
   </script>
 </body>
 </html>
